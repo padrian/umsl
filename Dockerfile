@@ -3,8 +3,8 @@ ADD . /code/
 RUN echo '{ "allow_root": true }' > /root/.bowerrc && \
     rm -Rf /code/target /code/node_modules && \
     cd /code/ && \
-    ./mvnw clean package -Pprod,war -DskipTests && \
-    mv /code/target/*.war /app.war
+    ./mvnw clean package -Pprod -DskipTests && \
+    mv /code/target/*.jar /app.jar
 
 FROM openjdk:8-jre-alpine
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
@@ -13,5 +13,5 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 EXPOSE 8080
 CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
     sleep ${JHIPSTER_SLEEP} && \
-    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
-COPY --from=0 /app.war .
+    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+COPY --from=0 /app.jar .
