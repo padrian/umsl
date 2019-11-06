@@ -28,13 +28,15 @@ spec:
               containerPort: 8081
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
+              #path: /
               port: http
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
+              #path: /
               port: http
+            initialDelaySeconds: 120
+            periodSeconds: 15
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
