@@ -28,8 +28,8 @@ node {
           sh 'ssh -oStrictHostKeyChecking=accept-new 3.133.93.101 uptime || true'
           sh 'scp -i $AWSKEY umsl-chart-0.1.0.tgz ubuntu@3.133.93.101:/tmp/'
 
-          sh 'ssh -i $AWSKEY ubuntu@3.133.93.101 sudo microk8s.helm upgrade --install umsl-dash-production /tmp/umsl-chart-0.1.0.tgz --set image.tag=$BRANCH_NAME-$BUILD_NUMBER --dry-run'
-          sh 'ssh -i $AWSKEY ubuntu@3.133.93.101 sudo microk8s.helm upgrade --install umsl-dash-production /tmp/umsl-chart-0.1.0.tgz --set image.tag=$BRANCH_NAME-$BUILD_NUMBER'
+          sh 'ssh -i $AWSKEY ubuntu@3.133.93.101 sudo microk8s.helm upgrade --install umsl-fa /tmp/umsl-chart-0.1.0.tgz --set image.tag=$BRANCH_NAME-$BUILD_NUMBER --dry-run'
+          sh 'ssh -i $AWSKEY ubuntu@3.133.93.101 sudo microk8s.helm upgrade --install umsl-fa /tmp/umsl-chart-0.1.0.tgz --set image.tag=$BRANCH_NAME-$BUILD_NUMBER'
 
          }
         } // deploy Production   
