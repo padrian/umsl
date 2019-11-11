@@ -5,7 +5,12 @@ node {
           echo "Checkout Source Code"
           checkout scm       
         }
-        
+        stage('SonarQube Analysis') {
+          withSonarQubeEnv('fa-sonar') {
+            sh './mvnw -Pprod clean verify sonar:sonar'
+          }
+        }
+
         stage('Tests') {
           sh './mvnw clean -X verify'
         }
