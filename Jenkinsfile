@@ -17,7 +17,7 @@ node {
 
         stage('Docker Build') {
           echo "Build Container and Push to AWS ECR"
-          docker.withRegistry('https://366670401047.dkr.ecr.us-east-2.amazonaws.com/future-airlines/umsl','ecr:us-east-2:aws-ecr-auth') {
+          docker.withRegistry('https://366670401047.dkr.ecr.us-east-2.amazonaws.com/future-airlines/umsl','ecr:us-east-2:aws-ecr') {
             def customImage = docker.build("future-airlines/umsl:${env.BRANCH_NAME}-${env.BUILD_NUMBER}")
             customImage.push()
           }   
